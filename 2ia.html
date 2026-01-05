@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #countdown {
+            text-align: center;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div id="countdown">
+        <h2>Countdown to Event</h2>
+        <div id="timer">
+            <span id="hours"><?php echo $hours; ?></span> hours
+            <span id="minutes"><?php echo $minutes; ?></span> minutes
+            <span id="seconds"><?php echo $seconds; ?></span> seconds
+        </div>
+    </div>
+
+    <script>
+        // Update the countdown every second
+        setInterval(updateCountdown, 1000);
+
+        function updateCountdown() {
+            // Get elements
+            const hoursElement = document.getElementById('hours');
+            const minutesElement = document.getElementById('minutes');
+            const secondsElement = document.getElementById('seconds');
+
+            // Get the current time
+            const now = new Date().getTime();
+
+            // Set the event date and time (in UTC)
+            const eventDate = new Date('2023-12-31T00:00:00Z').getTime();
+
+            // Calculate the time remaining until the event
+            const timeRemaining = eventDate - now;
+
+            // Convert the time remaining to hours, minutes, and seconds
+            const hours = Math.floor(timeRemaining / (1000 * 60 * 60));
+            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+            // Update the HTML elements
+            hoursElement.textContent = hours;
+            minutesElement.textContent = minutes;
+            secondsElement.textContent = seconds;
+        }
+    </script>
+</body>
+
+
+</html>
